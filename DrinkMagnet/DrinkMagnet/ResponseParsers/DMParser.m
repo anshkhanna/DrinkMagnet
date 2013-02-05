@@ -5,12 +5,12 @@
 
 @implementation DMParser
 
-+ (NSArray*)parseBarDetailsResponse:(NSString*)response
++ (NSArray*)parseBarDetailsResponseForArray:(NSArray*)response
 {
     SBJSON *sbJSON= [SBJSON new];
-    
-    NSDictionary *parsedData= [sbJSON objectWithString:response];
-	NSArray *resultsArray= [parsedData objectForKey:@"result"];
+
+
+	NSArray *resultsArray= response;
     [sbJSON release];
     
     NSMutableArray *dataArray = [[[NSMutableArray alloc]init] autorelease];
@@ -29,7 +29,8 @@
             barDetails.address = [barDict objectForKey:@"address"];
             barDetails.phone = [barDict objectForKey:@"phone"];
             barDetails.zipcode = [barDict objectForKey:@"zipcode"];
-            barDetails.imageUrl = [barDict objectForKey:@"photoloc"];
+            //barDetails.imageUrl = [barDict objectForKey:@"photoloc"];
+            barDetails.imageUrl = @"http://www.thursdayclub.com/Pictures/no5.jpg";
             
             NSArray *specialsArray = [dict objectForKey:@"special"];
             NSDictionary *sepcialDict = [specialsArray objectAtIndex:0];

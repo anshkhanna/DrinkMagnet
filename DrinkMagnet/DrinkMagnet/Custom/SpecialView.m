@@ -65,7 +65,6 @@
 {
     // bar image view
     barImageView = [[AsyncImageView alloc] initWithFrame:self.bounds];
-    barImageView.delegate = self;
     [self addSubview:barImageView];
     [barImageView release];
     
@@ -436,7 +435,7 @@
 
 -(void)setImageUrl:(NSString*)imageUrl
 {
-    [barImageView setImageUrl:imageUrl useCache:YES];
+    [barImageView setImageURL:[NSURL URLWithString:imageUrl]];
 }
 
 -(void)setSpecialwithBarDetails:(BarDetails*)barDetails
@@ -498,7 +497,6 @@
 {
     [countDownTimer invalidate];
     self.delegate = nil;
-    barImageView.delegate = nil;
     [endDate release];
     [tapGesture release];
     [super dealloc];

@@ -97,9 +97,28 @@
         connectionManager = [[ConnectionManager alloc] init];
         connectionManager.delegate = self;
         hud.labelText = @"Loading Specials";
-        [connectionManager getBarsNearCoordinate:CLLocationCoordinate2DMake(29.734044, -95.392964)];
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@lat=%f&long=%f",DrinkMagnetBarsAPI, 38.9087587, -90.35322719999999]]];
+        NSLog(@"Request string %@",[request description]);
+        AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+            NSLog(@"Pass Response = %@", JSON);
+            [hud hide:YES afterDelay:3];
+            self.hud = nil;
+            NSArray *barsArray = [DMParser parseBarDetailsResponseForArray:[JSON valueForKeyPath:@"result"]];
+            [barDetailsArray removeAllObjects];
+            [barDetailsArray addObjectsFromArray:barsArray];
+            [specialsPageFlowView reloadData];
+            NSLog(@"Array %@",barDetailsArray);
+            
+        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+            NSLog(@"Failed Response : %@", JSON);
+            hud.labelText = @"Some thing went wrong";
+            [hud hide:YES afterDelay:3];
+        }];
+        [operation start];
     }
 }
+
 
 #pragma mark - Info Button Tap Function
 
@@ -359,12 +378,12 @@
 
 - (void)didScrollToPage:(NSInteger)pageNumber inFlowView:(PagedFlowView *)flowView {
     NSLog(@"Scrolled to page # %d", pageNumber);
-    if(pageNumber-1>=0)
+    /*if(pageNumber-1>=0)
     {
         SpecialView *specialView = (SpecialView*)[flowView._scrollView viewWithTag:pageNumber-1];
         if(specialView)
             [specialView showOptions:YES];
-    }
+    }*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

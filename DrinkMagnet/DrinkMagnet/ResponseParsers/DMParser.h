@@ -2,7 +2,7 @@
 
 @interface DMParser : NSObject
 
-+ (NSArray*)parseBarDetailsResponse:(NSString*)response;
++ (NSArray*)parseBarDetailsResponseForArray:(NSArray*)response;
 
 @end
 

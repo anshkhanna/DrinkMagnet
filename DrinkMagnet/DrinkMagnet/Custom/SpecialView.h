@@ -13,7 +13,7 @@
 
 @end
 
-@interface SpecialView : UIView<UIAlertViewDelegate, AsyncImageDelegate>
+@interface SpecialView : UIView<UIAlertViewDelegate>
 {
     AsyncImageView *barImageView;
     

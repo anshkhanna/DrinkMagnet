@@ -1,4 +1,4 @@
 
 
-#define DrinkMagnetBarsAPI   @"http://dm.winkapps.com/drinkmagnet/services/bars.php?"
+#define DrinkMagnetBarsAPI   @"http://www.winkapps.com/drinkmagnet/services/bars.php?"
 
