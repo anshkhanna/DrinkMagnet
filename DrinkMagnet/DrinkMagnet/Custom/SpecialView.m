@@ -107,7 +107,7 @@
 																					  ZFontAttributeName,
 																					  nil]];
 
-    [str addAttribute:ZFontAttributeName value:[[FontManager sharedManager] zFontWithName:@"luxisb" pointSize:24] range:NSMakeRange(4, 1)];
+    [str addAttribute:ZFontAttributeName value:[[FontManager sharedManager] zFontWithName:@"luxisb" pointSize:20] range:NSMakeRange(4, 1)];
 	[str addAttribute:ZUnderlineStyleAttributeName value:[NSNumber numberWithInt:ZUnderlineStyleSingle] range:NSMakeRange(4, 1)];
     
 	[str addAttribute:ZForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, 5)];

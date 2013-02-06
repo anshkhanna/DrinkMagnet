@@ -24,5 +24,6 @@
 @property(nonatomic, retain) NSString* description;
 @property(nonatomic, retain) NSString* startTime;
 @property(nonatomic, retain) NSString* endTime;
+@property(nonatomic, retain) NSString* price;
 
 @end

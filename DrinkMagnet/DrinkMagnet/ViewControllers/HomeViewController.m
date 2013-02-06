@@ -97,22 +97,24 @@
         connectionManager = [[ConnectionManager alloc] init];
         connectionManager.delegate = self;
         hud.labelText = @"Loading Specials";
+        //specialsPageFlowView.hidden = YES;
         
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@lat=%f&long=%f",DrinkMagnetBarsAPI, 38.9087587, -90.35322719999999]]];
         NSLog(@"Request string %@",[request description]);
         AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
             NSLog(@"Pass Response = %@", JSON);
-            [hud hide:YES afterDelay:3];
+            [hud hide:YES afterDelay:1.5];
             self.hud = nil;
             NSArray *barsArray = [DMParser parseBarDetailsResponseForArray:[JSON valueForKeyPath:@"result"]];
             [barDetailsArray removeAllObjects];
             [barDetailsArray addObjectsFromArray:barsArray];
+            specialsPageFlowView.hidden = NO;
             [specialsPageFlowView reloadData];
             NSLog(@"Array %@",barDetailsArray);
             
         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-            NSLog(@"Failed Response : %@", JSON);
-            hud.labelText = @"Some thing went wrong";
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = @"Internet not available";
             [hud hide:YES afterDelay:3];
         }];
         [operation start];

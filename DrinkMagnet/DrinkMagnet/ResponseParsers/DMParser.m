@@ -38,6 +38,7 @@
             barDetails.special.description = [sepcialDict objectForKey:@"description"];
             barDetails.special.startTime = [sepcialDict objectForKey:@"starts"];
             barDetails.special.endTime = [sepcialDict objectForKey:@"ends"];
+            barDetails.special.price = [sepcialDict objectForKey:@"price"];
             
             [dataArray addObject:barDetails];
             [barDetails release];

@@ -6,6 +6,7 @@
 @synthesize description;
 @synthesize startTime;
 @synthesize endTime;
+@synthesize price;
 
 -(void)dealloc
 {
@@ -13,7 +14,7 @@
     [description release];
     [startTime release];
     [endTime release];
-    
+    [price release];
     [super dealloc];
 }
 
